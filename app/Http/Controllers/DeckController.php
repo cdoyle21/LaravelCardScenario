@@ -15,8 +15,11 @@ class DeckController extends Controller {
 
     public function index(Cards $cards)
     {
-        $shuffledDeck = Arr::shuffle($cards->deckOfCards());
-        return view('DealCards', compact('shuffledDeck'));
+        $deckShuffled = $cards->shuffleDeck();
+
+        return view('DealCards')
+        ->with('shuffledDeck', $deckShuffled)
+        ->with('dealtCards', $cards->deal($deckShuffled));
     }
 
 }
