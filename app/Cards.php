@@ -21,4 +21,23 @@ class Cards extends Model{
         return $newDeckOfCards;
     }
 
+    public function shuffleDeck ()
+    {
+        $shuffledDeck = Arr::shuffle(Cards::deckOfCards());
+
+        return $shuffledDeck;
+    }
+
+    public function deal($deckShuffled)
+    {
+        $hands = array(1 => array(), 2 => array(), 3 => array(), 4 => array());
+
+        for ($i = 0; $i < 7; $i++) {
+            $hands[1][] = array_shift($deckShuffled);
+            $hands[2][] = array_shift($deckShuffled);
+            $hands[3][] = array_shift($deckShuffled);
+            $hands[4][] = array_shift($deckShuffled);
+        }
+        return $hands;
+    }
 }

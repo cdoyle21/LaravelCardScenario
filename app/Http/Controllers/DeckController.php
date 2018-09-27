@@ -9,15 +9,15 @@ use Illuminate\Support\Arr;
 
 class DeckController extends Controller {
 
-    public function index (Cards $cards) {
-        $shuffledDeck = Arr::shuffle($cards->deckOfCards());
+    public function index(Cards $cards)
+    {
+        $deckShuffled = $cards->shuffleDeck();
 
         return view('DealCards')
-            ->with('deckOfCards', $cards->deckOfCards())
-            ->with('shuffledDeck', $shuffledDeck)
-            ;
+        ->with('deckOfCards', $cards->deckOfCards())
+        ->with('shuffledDeck', $deckShuffled)
+        ->with('dealtCards', $cards->deal($deckShuffled));
 
-        //return view('DealCards', compact('shuffledDeck'));
     }
 
 }
